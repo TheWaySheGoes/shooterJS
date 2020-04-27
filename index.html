@@ -4,20 +4,41 @@
     <meta charset="UTF -8">
     <title>Hello World!</title>
   </head>
-  <script> function onload() { var canvas=document.getElementById("canvas"); var context=canvas.getContext("2d");
-context.fillStyle = ’#dbdbdb ’; //color for rectangle
-//draw rectangle context.fillRect(0, 0, canvas.width , canvas.height);
-context.fillStyle = ’#000000’; //color for inside shapes
-context.fillRect(100,10,100,10); // draw top paddle
-context.strokeStyle = ’#000000’; //color for ball context.beginPath(); //start a draw path
-// draw ball context.arc(canvas.width / 2,canvas.height / 2,10,0, Math.PI*2,true);
-context.fill(); //close path and fill in the shape
-// draw bottom paddle context.fillRect(100,canvas.height - 20,100,10);
-}
-  </script>
-  <body onload="onload()">
+  <body>
     <canvas id="canvas" width="320" height="480">
     </canvas>
+    
+      <script> 
+    var gameFPS = 30;
+    // Our game will run at 30 frames per second 
+    var canvas=document.getElementById("canvas"); var context=canvas.getContext("2d");
+    function drawBackground() {
+      context.fillStyle = ’#dbdbdb ’; //color for rectangle
+      //draw rectangle
+      context.fillRect(0, 0, canvas.width , canvas.height);
+    }
+    function drawBall() { context.strokeStyle = ’#000000’; //color for ball 
+      context.beginPath(); //start a draw path 
+      context.arc(160,240,10,0,Math.PI*2,true); // draw ball
+      context.fill(); //close path and fill in the shape
+    }
+    function drawTopPaddle() {
+      context.fillStyle = ’#000000’; //color for inside shapes
+      context.fillRect(100,10,100,10); // draw top paddle
+    }
+    function drawBottomPaddle() {
+      context.fillStyle = ’#000000’; //color for inside shapes
+      context.fillRect(100,460,100,10); // draw top paddle
+    }
+    function pongGame() {
+      drawBackground();
+      drawTopPaddle();
+      drawBottomPaddle();
+      drawBall();
+    } //start game loop window.setInterval(pongGame , 1000 / gameFPS);
+    //start game loop
+    window.setInterval(pongGame , 1000 / gameFPS);
+  </script>
     
 
     

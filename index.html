@@ -9,37 +9,11 @@
     </canvas>
     
       <script> 
-    var gameFPS = 30;
-    // Our game will run at 30 frames per second 
+
     var canvas=document.getElementById("canvas");
     var context=canvas.getContext("2d");
-    function drawBackground() {
-      context.fillStyle = ’#121212 ’; //color for rectangle
-      //draw rectangle
-      context.fillRect(0, 0, canvas.width , canvas.height);
-    }
-    function drawBall() { context.strokeStyle = ’#000000’; //color for ball 
-      context.beginPath(); //start a draw path 
-      context.arc(160,240,10,0,Math.PI*2,true); // draw ball
-      context.fill(); //close path and fill in the shape
-    }
-    function drawTopPaddle() {
-      context.fillStyle = ’#000000’; //color for inside shapes
-      context.fillRect(100,10,100,10); // draw top paddle
-    }
-    function drawBottomPaddle() {
-      context.fillStyle = ’#000000’; //color for inside shapes
-      context.fillRect(100,460,100,10); // draw top paddle
-    }
-    function pongGame() {
-      drawBackground();
-      drawTopPaddle();
-      drawBottomPaddle();
-      drawBall();
-      context.font = ’bold 30px Times ’; context.fillText("Hello World!", canvas.width / 3, canvas.height / 3);
-    } //start game loop window.setInterval(pongGame , 1000 / gameFPS);
-    //start game loop
-    window.setInterval(pongGame , 1000 / gameFPS);
+        context.font = ’bold 30px Times ’; context.fillText("Hello World!", canvas.width / 3, canvas.height / 3);
+  
   </script>
     
 

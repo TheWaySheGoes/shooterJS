@@ -1,1 +1,18 @@
-<p>HELLO WORLD!</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF -8">
+    <title>Hello World!</title>
+  </head>
+  <script> function onload() {
+      var canvas=document.getElementById("canvas");
+      var context=canvas.getContext("2d");
+      context.font = ’bold 30px Times ’;
+      context.fillText("Hello World!", canvas.width / 3, canvas.height / 3);
+    }
+  </script>
+  <body onload="onload()">
+    <canvas id="canvas" width="320" height="480">
+    </canvas>
+  </body>
+</html>

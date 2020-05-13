@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ShooterJS</title>
+<script type="text/javascript" src="Game.js"></script>
+<script type="text/javascript" src="Crosshair.js"></script>
+<script type="text/javascript" src="Target.js"></script>
+
+</head>
+<body>
+
+
+
+	<canvas id="canvas" width="320" height="480" ></canvas>
+
+
+	<script type="text/javascript" src="Main.js"></script>
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+
+	
+	//this is a not working example of some principles 
+	//*************************************************************************
+	/*
+		// Our game will run at 30 frames per second 
+
+		var canvas = document.getElementById("canvas");
+
+		var context = canvas.getContext("2d");
+
+		function drawBackground() {
+			context.fillStyle = "#dbdbdb"; //color for rectangle
+			//draw rectangle
+			context.fillRect(0, 0, canvas.width, canvas.height);
+
+		}
+
+		var ball = new Object();
+		ball["x"] = 160;
+		ball["y"] = 240;
+		ball["xspeed"] = 1;
+		ball["yspeed"] = 3;
+		function drawBall() {
+			context.strokeStyle = "#000000"; //color for ball 
+			context.beginPath(); //start a draw path 
+			ball.x += ball.xspeed;
+			ball.y += ball.yspeed;
+			context.arc(ball.x, ball.y, 10, 0, Math.PI * 2, true); // draw ball
+			context.fill(); //close path and fill in the shape
+			if (ball.x >= canvas.width || ball.x <= 0) {
+				ball.xspeed = ball.xspeed * -1;
+			}
+			if (ball.y >= canvas.height || ball.y <= 0) {
+				ball.yspeed = ball.yspeed * -1;
+			}
+		}
+
+		function drawTopPaddle() {
+
+			context.fillStyle = "#000000"; //color for inside shapes
+
+			context.fillRect(100, 10, 100, 10); // draw top paddle
+
+		}
+
+		function drawBottomPaddle() {
+
+			context.fillStyle = "#000000"; //color for inside shapes
+
+			context.fillRect(100, 460, 100, 10); // draw top paddle
+
+		}
+
+		function hitDetect() {
+			if ((ball.y + BALL_RADIUS) >= (bottomPaddle.y)) {
+				if (bottomPaddle.x <= ball.x
+						&& ball.x <= (bottomPaddle.x + PADDLE_WIDTH)) {
+					console.log("bottomPaddle hit", ball.x, ball.y,
+							bottomPaddle.x, bottomPaddle.y);
+					ball.yspeed = ball.yspeed * -1;
+					ball.y = bottomPaddle.y - BALL_RADIUS;
+					return;
+				}
+			}
+			if ((ball.y - BALL_RADIUS) <= (topPaddle.y + PADDLE_HEIGHT)) {
+				if (topPaddle.x <= ball.x
+						&& ball.x <= (topPaddle.x + PADDLE_WIDTH)) {
+					console.log("topPaddle hit", ball.x, ball.y, topPaddle.x,
+							topPaddle.y);
+					ball.yspeed = ball.yspeed * -1;
+					ball.y = topPaddle.y + BALL_RADIUS + PADDLE_HEIGHT;
+					return;
+				}
+			}
+			if ((ball.x + BALL_RADIUS) >= canvas.width
+					|| (ball.x - BALL_RADIUS) <= 0) {
+				ball.xspeed = ball.xspeed * -1;
+			}
+			if (ball.y > (canvas.height + BALL_RADIUS)
+					|| ball.y < (0 - BALL_RADIUS)) {
+				initGameObjects();
+			}
+		}
+		rightArrowHit=false;
+		leftArrowHit=false;
+		document.onkeydown = function(event) {
+			console.log(event.keyCode); //what key did I press?
+			if (event.keyCode == 39) //right arrow
+			{
+				rightArrowHit = true;
+			}
+			if (event.keyCode == 37) //left arrow
+			{
+				leftArrowHit = true;
+			}
+		}
+
+		function keybardEvents() {
+			if (leftArrowHit) {
+				bottomPaddle.x -= 3;
+				leftArrowHit = false;
+			}
+			if (rightArrowHit) {
+				bottomPaddle.x += 3;
+				rightArrowHit = false;
+			}
+			if (bottomPaddle.x <= 0) {
+				bottomPaddle.x = 0;
+			}
+			if (bottomPaddle.x >= (canvas.width - PADDLE_WIDTH)) {
+				bottomPaddle.x = canvas.width - PADDLE_WIDTH;
+			}
+		}
+
+		function computerAI() {
+			if (ball.yspeed < 0) {
+				if (ball.x < (topPaddle.x + PADDLE_WIDTH / 2)) {
+					topPaddle.x--;
+				} else {
+					topPaddle.x++;
+				}
+			}
+			if (topPaddle.x <= 0) {
+				topPaddle.x = 0;
+			}
+			if (topPaddle.x >= (canvas.width - PADDLE_WIDTH)) {
+				topPaddle.x = canvas.width - PADDLE_WIDTH;
+			}
+		}
+
+		var pointsPlayer = 0;
+		var pointsComputer = 0;
+		function drawScore() {
+			if (pointsPlayer > 0 || pointsComputer > 0) {
+				context.font = "bold 15px Times";
+				context.fillText("You:" + pointsPlayer + " CPU:"
+						+ pointsComputer, 5, 12);
+			}
+		}
+		
+		function pongGame() {
+
+			keybardEvents();
+			computerAI();
+			drawBackground();
+			drawTopPaddle();
+			drawBottomPaddle();
+			drawBall();
+			hitDetect();
+			drawScore();
+
+		}
+
+		//start game loop
+		var gameFPS = 30;
+		//window.setInterval(pongGame, 1000 / gameFPS);
+		*/
+	</script>
+
+
+</body>
+</html>

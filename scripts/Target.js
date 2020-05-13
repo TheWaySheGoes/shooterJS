@@ -9,13 +9,13 @@ function Target(canvas) {
 	this.yPos = Math.round(Math.random() * this.canvas.height);
 	this.xDirection = Math.round(Math.random()) > 0 ? 1 : -1;
 	this.yDirection = Math.round(Math.random()) > 0 ? 1 : -1;
-	this.xPosChange = 1 * this.xDirection;
-	this.yPosChange = 1 * this.yDirection;
-	this.xVelocity = Math.random();
-	this.yVelocity = Math.random();
+	this.xVelocity = Math.round(Math.random()*1)+1;
+	this.yVelocity = Math.round(Math.random()*1)+1;
+	this.xPosChange = 1 * this.xDirection*this.xVelocity;
+	this.yPosChange = 1 * this.yDirection*this.yVelocity;
 	this.hit = false;
 	this.hitSound = new Audio("resources/breaking.mp3");
-
+	this.value=this.xVelocity;
 }
 
 Target.prototype.draw = function() {
@@ -39,7 +39,7 @@ Target.prototype.draw = function() {
 
 }
 
-Target.prototype.hitCheck = function(xpos, ypos) {
+Target.prototype.inHitBox = function(xpos, ypos) {
 	if (xpos > this.xPos && xpos < this.xPos + 20 && ypos > this.yPos
 			&& ypos < this.yPos + 20) {
 		return true;
@@ -57,3 +57,23 @@ Target.prototype.targetHit = function() {
 Target.prototype.isHit = function() {
 	return this.hit;
 }
+
+
+Target.prototype.inBoundries = function(){
+	if(this.xPos>0&&this.yPos>0&&this.xPos<this.canvas.width&&this.yPos<this.canvas.height){
+		return true;
+	}
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+

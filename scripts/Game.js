@@ -12,7 +12,9 @@ function Game() {
 	this.crosshair = new Crosshair(this.canvas);
 	this.maxTargets=10;
 	this.targets=[];
-	this.canvas.addEventListener("mousedown",this.shot.bind(this),false);	
+	this.canvas.addEventListener("mousedown",this.shot.bind(this),false);
+
+	
 	this.score=0;
 }
 // instance methods
@@ -23,13 +25,18 @@ Game.prototype.shot = function(event){
 		console.log("SCORE: "+this.score);
 		this.crosshair.shot();
 		for (var i = 0; i < this.targets.length; i++) {
-			if(this.targets[i].hitCheck(this.crosshair.xPos,this.crosshair.yPos)){
+			if(this.targets[i].hitCheck(this.crosshair.xPos,this.crosshair.yPos)&&!this.crosshair.isEmpty()){
 				this.targets[i].targetHit();// mark as hit
 				this.score++;
 			}
 		}
+		if(this.crosshair.isEmpty()&&this.crosshair.inReloadBox()){
+			this.crosshair.reload();
+		}
 	}
+
 }
+
 
 
 Game.prototype.showScore = function () {
@@ -101,7 +108,7 @@ Game.prototype.mainLoop=function() {
 	// with putImageData()
 	
 	this.drawBackground();
-	
+	this.crosshair.getMagazine().draw();
 	this.clearTargets();
 	this.generateTargets();
 	this.drawTargets();

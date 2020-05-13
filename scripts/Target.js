@@ -14,7 +14,7 @@ function Target(canvas) {
 	this.xVelocity = Math.random();
 	this.yVelocity = Math.random();
 	this.hit = false;
-	this.hitSound = new Audio("breaking.mp3");
+	this.hitSound = new Audio("resources/breaking.mp3");
 
 }
 

@@ -20,7 +20,7 @@ Timer.prototype.moveTime = function (){
 		this.sec++;
 	}
 	if(this.isFinished()){
-		this.resetTime();
+		//this.resetTime();
 	}
 }
 

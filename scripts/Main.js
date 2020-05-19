@@ -4,10 +4,10 @@
 
 function main(){
 	var game = new Game();
-	
+	//menu
 	game.setup();	
 	game.loop(30);//argument = fps
-	
+	//3 loops with setinterval splash, game,score
 }
 
 main();

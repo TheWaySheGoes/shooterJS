@@ -16,7 +16,7 @@ function Game() {
 	this.canvas.addEventListener("mousedown",this.shot.bind(this),false);
 	this.endTime=5; //game play time
 	this.timer = new Timer(this.fps,this.canvas,this.endTime);
-	this.score=0;
+	this.score = new Score(this.canvas);
 	this.interval=null;
 }
 // instance methods
@@ -29,7 +29,7 @@ Game.prototype.shot = function(event){
 		for (var i = 0; i < this.targets.length; i++) {
 			if(this.targets[i].inHitBox(this.crosshair.xPos,this.crosshair.yPos)&&!this.crosshair.isEmpty()){
 				this.targets[i].targetHit();// mark as hit
-				this.score+=this.targets[i].value;//add to score
+				this.score.add(this.targets[i].value);//add to score
 			}
 		}
 		if(this.crosshair.isEmpty()&&this.crosshair.inReloadBox()){
@@ -42,12 +42,14 @@ Game.prototype.shot = function(event){
 Game.prototype.showTimer = function(){
 	this.timer.moveTime();
 	this.timer.drawTime();
+
 }
 
 Game.prototype.isTimerFinished = function(){
 	if(this.timer.isFinished()){
-		window.clearInterval(this.interval);
 		console.log("clear interval");
+		window.clearInterval(this.interval);
+		
 	}
 	else{
 		return false;
@@ -55,11 +57,7 @@ Game.prototype.isTimerFinished = function(){
 }
 
 Game.prototype.showScore = function () {
- 	this.context.save();
-	this.context.font = "bold 32pt Courier New";
-	this.context.fillStyle = "#ffffff";
-	this.context.fillText(this.score, this.canvas.width/6,40);
-	this.context.restore();
+	this.score.draw();
 }
 
 Game.prototype.generateTargets= function() {
@@ -93,7 +91,7 @@ Game.prototype.clearTargets= function() {
 			this.targets.splice(i,1);// remove only //filter no mutate/not
 									// used
 			i--;// for glitch with shifted indexes
-			this.score--;
+			this.score.minus(1);
 		}
 	}
 }
@@ -149,7 +147,5 @@ Game.prototype.loop = function(fps) {
 	this.interval = window.setInterval(this.mainLoop.bind(this), 1000 / gameFPS);// etInterval(()
 																	// // => //
 																	// this.showLoading
-																	// // 1000
-																	// //
-																	// gameFPS);
+																	// // 1000															// /																// gameFPS);
 }

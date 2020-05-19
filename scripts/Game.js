@@ -6,16 +6,18 @@
 function Game() {
 	// TODO
 	// timer, score board, bullets
-	RUNNING=true;
+	this.RUNNING=true;
+	this.fps=30;
 	this.canvas = document.getElementById("canvas");
 	this.context = canvas.getContext("2d");
 	this.crosshair = new Crosshair(this.canvas);
 	this.maxTargets=5;
 	this.targets=[];
 	this.canvas.addEventListener("mousedown",this.shot.bind(this),false);
-
-	
+	this.endTime=5; //game play time
+	this.timer = new Timer(this.fps,this.canvas,this.endTime);
 	this.score=0;
+	this.interval=null;
 }
 // instance methods
 
@@ -37,11 +39,26 @@ Game.prototype.shot = function(event){
 
 }
 
+Game.prototype.showTimer = function(){
+	this.timer.moveTime();
+	this.timer.drawTime();
+}
+
+Game.prototype.isTimerFinished = function(){
+	if(this.timer.isFinished()){
+		window.clearInterval(this.interval);
+		console.log("clear interval");
+	}
+	else{
+		return false;
+	}
+}
+
 Game.prototype.showScore = function () {
  	this.context.save();
 	this.context.font = "bold 32pt Courier New";
 	this.context.fillStyle = "#ffffff";
-	this.context.fillText(this.score, this.canvas.width/3,40);
+	this.context.fillText(this.score, this.canvas.width/6,40);
 	this.context.restore();
 }
 
@@ -63,14 +80,18 @@ Game.prototype.clearTargets= function() {
 	for (var i = 0; i < this.targets.length; i++) {
 		if(this.targets[i].isHit()==true) 
 		{
+			delete this.targets[i]
 			this.targets.splice(i,1);// remove only //filter no mutate/not
 										// used
 			i--;// for glitch with shifted indexes
 			
 		}
+	}
+	for (var i = 0; i < this.targets.length; i++) {
 		if(!this.targets[i].inBoundries()){
+			delete this.targets[i]	
 			this.targets.splice(i,1);// remove only //filter no mutate/not
-										// used
+									// used
 			i--;// for glitch with shifted indexes
 			this.score--;
 		}
@@ -112,16 +133,20 @@ Game.prototype.mainLoop=function() {
 	this.generateTargets();
 	this.drawTargets();
 	this.showScore();
+	this.showTimer();
+	this.isTimerFinished();
 	// this.context.restore(); // this oges with contextSave() in setup()
 	// this.context.putImageData(imageData, 0, 0); // this goes with imageData
 	// this.clearFrame();
 	this.drawMousePosition();
+	
 }
 
 // main entry to the game from Main.js
 Game.prototype.loop = function(fps) {
 	var gameFPS = fps;
-	window.setInterval(this.mainLoop.bind(this), 1000 / gameFPS);// etInterval(()
+	this.fps=fps
+	this.interval = window.setInterval(this.mainLoop.bind(this), 1000 / gameFPS);// etInterval(()
 																	// // => //
 																	// this.showLoading
 																	// // 1000

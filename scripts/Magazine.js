@@ -5,7 +5,10 @@ function Magazine(canvas) {
 	this.canvas = canvas;
 	this.context = this.canvas.getContext("2d");
 	this.bullets = 15;
-
+	this.magazineFullColor="#FFF9F2";
+	this.magazineMediumColor="#F7B16A";
+	this.magazineLowColor="#FA7D7D";
+	this.magazineColor=this.magazineFullColor;
 }
 
 Magazine.prototype.isEmpty = function() {
@@ -18,6 +21,7 @@ Magazine.prototype.isEmpty = function() {
 Magazine.prototype.reload = function() {
 	if (this.isEmpty()) {
 		this.bullets = 15;
+		this.magazineColor= this.magazineFullColor;
 	}
 
 }
@@ -25,7 +29,7 @@ Magazine.prototype.reload = function() {
 Magazine.prototype.shot = function() {
 	if (!this.isEmpty()) {
 		this.bullets--;
-
+		this.setMagazineColor();
 	}
 }
 
@@ -36,11 +40,21 @@ Magazine.prototype.inReloadBox = function(xpos,ypos){
 	return false;
 }
 
+Magazine.prototype.setMagazineColor = function (){
+	if(this.bullets>=10){
+		this.magazineColor= this.magazineFullColor;
+	}else if(this.bullets<10&&this.bullets>5){
+		this.magazineColor= this.magazineMediumColor;
+	}else{
+		this.magazineColor= this.magazineLowColor;
+	}
+}
+
 Magazine.prototype.draw = function() {
 
 	this.context.save();
 	this.context.beginPath();
-	this.context.strokeStile = "#ff8f3f";
+	this.context.strokeStyle = this.magazineColor;;
 	//this.context.translate(this.canvas.width - 80, 20);
 	this.context.lineWidth = 2;
 	var xShift=0;

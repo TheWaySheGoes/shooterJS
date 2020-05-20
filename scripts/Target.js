@@ -31,7 +31,7 @@ Target.prototype.draw = function() {
 	this.context.lineTo(0, -10);
 	this.context.lineTo(-10, 0);
 	this.context.lineTo(5, 0);
-	this.context.strokeStile = "#fafafa";
+	this.context.strokeStyle = "#00FFFF";
 	this.context.stroke();
 	this.context.restore();
 	this.xPos = this.xPos + this.xPosChange;

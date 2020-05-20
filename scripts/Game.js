@@ -14,7 +14,7 @@ function Game() {
 	this.maxTargets=5;
 	this.targets=[];
 	this.canvas.addEventListener("mousedown",this.shot.bind(this),false);
-	this.endTime=5; //game play time
+	this.endTime=60; //game play time
 	this.timer = new Timer(this.fps,this.canvas,this.endTime);
 	this.score = new Score(this.canvas);
 	this.interval=null;
@@ -102,7 +102,7 @@ Game.prototype.clearFrame = function() {
 
 Game.prototype.drawBackground = function() {
 	this.context.beginPath();
-	this.context.fillStyle = "#dbdbdb"; // color for rectangle
+	this.context.fillStyle = "#000000"; // color for rectangle
 	// draw rectangle
 	this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 

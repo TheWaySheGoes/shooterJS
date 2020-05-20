@@ -81,7 +81,7 @@ Crosshair.prototype.draw = function() {
 	this.context.lineTo(0, -10);
 	this.context.moveTo(0, +3);
 	this.context.lineTo(0, +10);
-	this.context.strokeStile = this.crosshairColor;
+	this.context.strokeStyle = this.crosshairColor;
 	this.context.stroke();
 	this.context.restore();
 

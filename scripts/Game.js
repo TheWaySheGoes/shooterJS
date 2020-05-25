@@ -3,42 +3,59 @@
  */
 
 // constructor
-function Game() {
+function Game(fps) {
 	// TODO
-	// timer, score board, bullets
 	this.RUNNING=true;
-	this.fps=30;
+	this.fps=fps;
 	this.canvas = document.getElementById("canvas");
-	this.context = canvas.getContext("2d");
+	this.context = this.canvas.getContext("2d");
 	this.crosshair = new Crosshair(this.canvas);
 	this.maxTargets=5;
 	this.targets=[];
-	this.canvas.addEventListener("mousedown",this.shot.bind(this),false);
-	this.endTime=60; //game play time
+	this.canvas.addEventListener("mousedown",this.shot.bind(this));
+	this.endTime=5; // game play time
 	this.timer = new Timer(this.fps,this.canvas,this.endTime);
 	this.score = new Score(this.canvas);
 	this.interval=null;
+	this.menu = new Menu(this.canvas);
+	this.gameState="MENU";
+	
 }
 // instance methods
+// //////////////////// SHOOTING/SELECTING - MOUSE EVENTS
+// /////////////////////////////
 
 // checks positions of crosshair and targets, marks targets true if hit
 Game.prototype.shot = function(event){
+	console.log("!!!!!!")
 	if(event.button==0){
+		if(this.gameState=="GAME"){
 		console.log("SCORE: "+this.score);
 		this.crosshair.shot();
 		for (var i = 0; i < this.targets.length; i++) {
 			if(this.targets[i].inHitBox(this.crosshair.xPos,this.crosshair.yPos)&&!this.crosshair.isEmpty()){
 				this.targets[i].targetHit();// mark as hit
-				this.score.add(this.targets[i].value);//add to score
+				this.score.add(this.targets[i].value);// add to score
 			}
 		}
 		if(this.crosshair.isEmpty()&&this.crosshair.inReloadBox()){
 			this.crosshair.reload();
 		}
+		}else if(this.gameState=="MENU"){
+			
+			if(this.menu.inHitBox(this.crosshair.xPos,this.crosshair.yPos)){
+				
+				this.startGame();
+				
+			}
+		}
 	}
-
 }
 
+
+
+
+// //////////////////// TIMER /////////////////////////////
 Game.prototype.showTimer = function(){
 	this.timer.moveTime();
 	this.timer.drawTime();
@@ -47,14 +64,51 @@ Game.prototype.showTimer = function(){
 
 Game.prototype.isTimerFinished = function(){
 	if(this.timer.isFinished()){
-		console.log("clear interval");
-		window.clearInterval(this.interval);
+		this.startMenu();
 		
 	}
 	else{
 		return false;
 	}
 }
+
+// //////////////////// STATE MANGEMENT /////////////////////////////
+
+Game.prototype.stopGame = function(){
+	console.log("clear interval");		
+	window.clearInterval(this.interval);
+	this.gameState="MENU";
+	
+}
+Game.prototype.stopMenu = function(){
+	console.log("clear interval");	
+	window.clearInterval(this.interval);
+	this.gameState="GAME";
+}
+
+Game.prototype.startGame = function(){
+	this.stopMenu();
+	this.setup();
+	this.interval = window.setInterval(this.mainLoop.bind(this), 1000 / this.fps);
+}
+
+Game.prototype.startMenu = function(){
+	this.stopGame();
+	this.score.setPosMenu();	
+	this.interval = window.setInterval(this.drawMenu.bind(this), 1000 / this.fps);// etInterval(()
+	
+}
+
+Game.prototype.drawMenu = function(){
+	this.drawBackground();
+	this.menu.draw();
+	this.score.draw();	
+	this.drawMousePosition();
+}
+
+
+
+// //////////////////// SCORE /////////////////////////////
 
 Game.prototype.showScore = function () {
 	this.score.draw();
@@ -67,6 +121,8 @@ Game.prototype.generateTargets= function() {
 	console.log(this.targets);
 }
 
+// //////////////////// TARGETS /////////////////////////////
+
 Game.prototype.drawTargets= function() {
 	for (var i = 0; i < this.targets.length; i++) {
 		this.targets[i].draw();
@@ -74,6 +130,7 @@ Game.prototype.drawTargets= function() {
 	
 }
 
+// remove hit targets
 Game.prototype.clearTargets= function() {
 	for (var i = 0; i < this.targets.length; i++) {
 		if(this.targets[i].isHit()==true) 
@@ -85,6 +142,7 @@ Game.prototype.clearTargets= function() {
 			
 		}
 	}
+	// remove targets outside screen
 	for (var i = 0; i < this.targets.length; i++) {
 		if(!this.targets[i].inBoundries()){
 			delete this.targets[i]	
@@ -95,6 +153,8 @@ Game.prototype.clearTargets= function() {
 		}
 	}
 }
+
+// //////////////////// GAME STUFF /////////////////////////////
 
 Game.prototype.clearFrame = function() {
 	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -115,7 +175,11 @@ Game.prototype.drawMousePosition = function() {
 }
 
 Game.prototype.setup = function() {
+	this.timer.resetTime();
 	this.drawBackground();
+	this.score.setPosGame();// show score on the top
+	this.score.resetScore();
+	this.crosshair.hardReload();
 	// this.context.save(); // this goes with this.context.restore(); in
 	// mainloop()
 }
@@ -140,12 +204,8 @@ Game.prototype.mainLoop=function() {
 	
 }
 
-// main entry to the game from Main.js
-Game.prototype.loop = function(fps) {
-	var gameFPS = fps;
-	this.fps=fps
-	this.interval = window.setInterval(this.mainLoop.bind(this), 1000 / gameFPS);// etInterval(()
-																	// // => //
-																	// this.showLoading
-																	// // 1000															// /																// gameFPS);
-}
+// //////////////////// /////////////////////////////
+
+
+
+

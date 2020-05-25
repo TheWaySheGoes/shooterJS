@@ -2,12 +2,17 @@
  * main entry point to the game. here HTML sends its canvas object to be manipulated
  */
 
-function main(){
-	var game = new Game();
-	//menu
-	game.setup();	
-	game.loop(30);//argument = fps
+
+
+function game(){
+	var game = new Game(30);
+	//game.setup();	
+	//game.startGame();//argument = fps
+	game.startMenu();
+	
 	//3 loops with setinterval splash, game,score
+
 }
 
-main();
+
+game();

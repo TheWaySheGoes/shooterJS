@@ -26,6 +26,12 @@ Magazine.prototype.reload = function() {
 
 }
 
+Magazine.prototype.hardReload = function() {
+		this.bullets = 15;
+		this.magazineColor= this.magazineFullColor;
+
+}
+
 Magazine.prototype.shot = function() {
 	if (!this.isEmpty()) {
 		this.bullets--;

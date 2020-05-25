@@ -26,6 +26,11 @@ Crosshair.prototype.reload = function() {
 	
 }
 
+Crosshair.prototype.hardReload = function () {
+	this.magazine.hardReload();
+	this.shotSound=this.fullSound;
+}
+
 Crosshair.prototype.shot = function() {
 	if (!this.magazine.isEmpty()) {
 		this.magazine.shot();

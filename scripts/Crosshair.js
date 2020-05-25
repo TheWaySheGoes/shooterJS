@@ -67,6 +67,8 @@ Crosshair.prototype.draw = function() {
 
 	// console.log("test- crosshair")
 	console.log(this.xPos + "," + this.yPos);
+
+	
 	// hide cursor when on canvas
 	if (this.xPos > 0 && this.xPos < this.canvas.width && this.yPos > 0
 			&& this.yPos < canvas.height) {
@@ -76,7 +78,7 @@ Crosshair.prototype.draw = function() {
 
 	this.context.save();
 	this.context.beginPath();
-	this.context.translate(this.xPos - 8, this.yPos - 8);
+	this.context.translate(this.xPos-this.canvas.offsetLeft, this.yPos-this.canvas.offsetTop);
 	this.context.arc(0, 0, 10, 0, Math.PI * 2, true);
 	this.context.moveTo(-3, 0);
 	this.context.lineTo(-10, 0);

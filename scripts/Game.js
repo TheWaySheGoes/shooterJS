@@ -13,7 +13,7 @@ function Game(fps) {
 	this.maxTargets=5;
 	this.targets=[];
 	this.canvas.addEventListener("mousedown",this.shot.bind(this));
-	this.endTime=5; // game play time
+	this.endTime=30; // game play time
 	this.timer = new Timer(this.fps,this.canvas,this.endTime);
 	this.score = new Score(this.canvas);
 	this.interval=null;
@@ -188,7 +188,6 @@ Game.prototype.mainLoop=function() {
 	// var imageData =
 	// this.context.getImageData(0,0,canvas.width,canvas.height); //this goes
 	// with putImageData()
-	
 	this.drawBackground();
 	this.crosshair.getMagazine().draw();
 	this.clearTargets();

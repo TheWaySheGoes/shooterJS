@@ -40,7 +40,7 @@ Magazine.prototype.shot = function() {
 }
 
 Magazine.prototype.inReloadBox = function(xpos,ypos){
-	if(xpos>10&&xpos<75&&ypos>this.canvas.height-35&&ypos<this.canvas.height-5){
+	if(xpos>90+this.canvas.offsetLeft&&xpos<150+this.canvas.offsetLeft&&ypos>this.canvas.height-35+this.canvas.offsetTop&&ypos<this.canvas.height-5+this.canvas.offsetTop){
 		return true;
 	}
 	return false;
@@ -60,6 +60,7 @@ Magazine.prototype.draw = function() {
 
 	this.context.save();
 	this.context.beginPath();
+	this.context.translate(this.canvas.offsetLeft, this.canvas.offsetTop);
 	this.context.strokeStyle = this.magazineColor;;
 	//this.context.translate(this.canvas.width - 80, 20);
 	this.context.lineWidth = 2;

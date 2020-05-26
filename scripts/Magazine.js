@@ -40,7 +40,7 @@ Magazine.prototype.shot = function() {
 }
 
 Magazine.prototype.inReloadBox = function(xpos,ypos){
-	if(xpos>90+this.canvas.offsetLeft&&xpos<150+this.canvas.offsetLeft&&ypos>this.canvas.height-35+this.canvas.offsetTop&&ypos<this.canvas.height-5+this.canvas.offsetTop){
+	if(xpos>10+this.canvas.offsetLeft&&xpos<100+this.canvas.offsetLeft&&ypos>this.canvas.height-35+this.canvas.offsetTop&&ypos<this.canvas.height-5+this.canvas.offsetTop){
 		return true;
 	}
 	return false;

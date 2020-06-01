@@ -82,6 +82,7 @@ Game.prototype.isTimerFinished = function(){
 Game.prototype.stopGame = function(){
 	console.log("clear interval");		
 	window.clearInterval(this.interval);
+	this.timer.stopSound();
 	this.gameState="MENU";
 	
 }

@@ -14,6 +14,7 @@ function Game(fps) {
 	this.crosshair = new Crosshair(this.canvas);
 	this.maxTargets=5;
 	this.targets=[];
+	this.deadbeat_targets=[];
 	this.canvas.addEventListener("mousedown",this.shot.bind(this));
 	this.endTime=30; // game play time
 	this.timer = new Timer(this.fps,this.canvas,this.endTime);
@@ -128,8 +129,13 @@ Game.prototype.generateTargets= function() {
 // //////////////////// TARGETS /////////////////////////////
 
 Game.prototype.drawTargets= function() {
+	//draw live targets
 	for (var i = 0; i < this.targets.length; i++) {
 		this.targets[i].draw();
+	}
+	//draw deadbeat_targets
+	for (var i = 0; i < this.deadbeat_targets.length; i++) {
+		this.deadbeat_targets[i].draw();
 	}
 	
 }
@@ -137,14 +143,16 @@ Game.prototype.drawTargets= function() {
 // remove hit targets
 Game.prototype.clearTargets= function() {
 	this.removeOutScreenTargets();
+	this.moveToDeadbeat_Targets();
 }
 
 //not used after adding explosions to targets
 //remove hit targets
-Game.prototype.removeHitTargets=function() {
+Game.prototype.moveToDeadbeat_Targets=function() {
 	for (var i = 0; i < this.targets.length; i++) {
 		if(this.targets[i].isHit()==true) 
 		{
+			this.deadbeat_targets.push(this.targets[i]);
 			delete this.targets[i]
 			this.targets.splice(i,1);// remove only //filter no mutate/not
 										// used
@@ -155,6 +163,7 @@ Game.prototype.removeHitTargets=function() {
 }
 //remove targets outside screen
 Game.prototype.removeOutScreenTargets = function() {
+	//if live target "escapes the screen" points redacted
 	for (var i = 0; i < this.targets.length; i++) {
 		if(!this.targets[i].inBoundries()){
 			delete this.targets[i]	
@@ -162,6 +171,13 @@ Game.prototype.removeOutScreenTargets = function() {
 									// used
 			i--;// for glitch with shifted indexes
 			this.score.minus(1);
+		}
+	}
+	//if of screen delete from deadbeat targets list
+	for (var i = 0; i < this.deadbeat_targets.length; i++) {
+		if(!this.deadbeat_targets[i].inBoundries()){
+			delete this.deadbeat_targets[i]	
+			this.deadbeat_targets.splice(i,1);// remove only
 		}
 	}
 }

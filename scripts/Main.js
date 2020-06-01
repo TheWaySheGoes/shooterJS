@@ -13,6 +13,4 @@ function game(){
 	//3 loops with setinterval splash, game,score
 
 }
-
-
 game();

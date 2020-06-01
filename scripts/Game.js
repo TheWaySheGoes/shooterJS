@@ -8,6 +8,8 @@ function Game(fps) {
 	this.RUNNING=true;
 	this.fps=fps;
 	this.canvas = document.getElementById("canvas");
+	this.canvas.width=window.innerWidth*0.8; 
+	this.canvas.height=window.innerHeight*0.8; 
 	this.context = this.canvas.getContext("2d");
 	this.crosshair = new Crosshair(this.canvas);
 	this.maxTargets=5;
@@ -19,6 +21,7 @@ function Game(fps) {
 	this.interval=null;
 	this.menu = new Menu(this.canvas);
 	this.gameState="MENU";
+	console.log("width: "+this.canvas.width+" height: "+this.canvas.height);
 	
 }
 // instance methods
@@ -27,6 +30,7 @@ function Game(fps) {
 
 // checks positions of crosshair and targets, marks targets true if hit
 Game.prototype.shot = function(event){
+	 event.stopPropagation(); event.preventDefault();
 	console.log("!!!!!!")
 	if(event.button==0){
 		if(this.gameState=="GAME"){
@@ -132,6 +136,12 @@ Game.prototype.drawTargets= function() {
 
 // remove hit targets
 Game.prototype.clearTargets= function() {
+	this.removeOutScreenTargets();
+}
+
+//not used after adding explosions to targets
+//remove hit targets
+Game.prototype.removeHitTargets=function() {
 	for (var i = 0; i < this.targets.length; i++) {
 		if(this.targets[i].isHit()==true) 
 		{
@@ -142,7 +152,9 @@ Game.prototype.clearTargets= function() {
 			
 		}
 	}
-	// remove targets outside screen
+}
+//remove targets outside screen
+Game.prototype.removeOutScreenTargets = function() {
 	for (var i = 0; i < this.targets.length; i++) {
 		if(!this.targets[i].inBoundries()){
 			delete this.targets[i]	

@@ -79,6 +79,7 @@ Crosshair.prototype.draw = function() {
 	this.context.save();
 	this.context.beginPath();
 	this.context.translate(this.xPos-this.canvas.offsetLeft, this.yPos-this.canvas.offsetTop);
+	this.context.lineWidth=2;
 	this.context.arc(0, 0, 10, 0, Math.PI * 2, true);
 	this.context.moveTo(-3, 0);
 	this.context.lineTo(-10, 0);

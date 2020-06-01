@@ -19,8 +19,8 @@ function Menu(canvas) {
 	//this.timer = new Timer(this.fps,this.canvas,this.endTime);
 	//this.score = score;//new Score(this.canvas);
 	//this.interval=null;
-	this.xPos =this.canvas.width/4+this.canvas.offsetLeft;
-	this.yPos = this.canvas.height/2+this.canvas.offsetTop;
+	this.xPos =this.canvas.width/3;
+	this.yPos = this.canvas.height/2;
 	
 }
 // instance methods
@@ -28,7 +28,7 @@ function Menu(canvas) {
 
 
 Menu.prototype.inHitBox = function (xPos,yPos){
-	if(xPos>this.xPos&&xPos<this.xPos+400&&yPos>this.yPos-20&&yPos<this.yPos+50){
+	if(xPos>this.canvas.offsetLeft+this.xPos&&xPos<this.canvas.offsetLeft+this.xPos+250&&yPos>this.canvas.offsetTop+this.yPos-32&&yPos<this.canvas.offsetTop+this.yPos){
 		console.log("SELECT CLIcK");
 		return true;
 		

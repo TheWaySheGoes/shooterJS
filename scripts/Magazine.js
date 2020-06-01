@@ -40,7 +40,7 @@ Magazine.prototype.shot = function() {
 }
 
 Magazine.prototype.inReloadBox = function(xpos,ypos){
-	if(xpos>10+this.canvas.offsetLeft&&xpos<100+this.canvas.offsetLeft&&ypos>this.canvas.height-35+this.canvas.offsetTop&&ypos<this.canvas.height-5+this.canvas.offsetTop){
+	if(xpos>10+this.canvas.offsetLeft&&xpos<75+this.canvas.offsetLeft&&ypos>this.canvas.height-35+this.canvas.offsetTop&&ypos<this.canvas.height-5+this.canvas.offsetTop){
 		return true;
 	}
 	return false;
@@ -60,10 +60,10 @@ Magazine.prototype.draw = function() {
 
 	this.context.save();
 	this.context.beginPath();
-	this.context.translate(this.canvas.offsetLeft, this.canvas.offsetTop);
-	this.context.strokeStyle = this.magazineColor;;
+	this.context.translate(0, 0);
+	this.context.strokeStyle = this.magazineColor;
 	//this.context.translate(this.canvas.width - 80, 20);
-	this.context.lineWidth = 2;
+	this.context.lineWidth = 4;
 	var xShift=0;
 	for (var i = 0; i < this.bullets; i++) {
 		this.context.moveTo(20+xShift, this.canvas.height-30);
@@ -75,9 +75,6 @@ Magazine.prototype.draw = function() {
 	this.context.lineTo(75,this.canvas.height-5);
 	this.context.lineTo(68,this.canvas.height-35);
 	this.context.lineTo(10,this.canvas.height-35);
-	
-	
-	
 	this.context.stroke();
 	this.context.restore();
 }

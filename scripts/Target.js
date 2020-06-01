@@ -16,32 +16,54 @@ function Target(canvas) {
 	this.hit = false;
 	this.hitSound = new Audio("resources/breaking.mp3");
 	this.value=this.xVelocity;
+	
 }
 
 Target.prototype.draw = function() {
-	// console.log("test- target");
-	// console.log(this.xPos+","+this.yPos);
-	this.context.save();
-	this.context.beginPath();
-	this.context.translate(this.xPos-this.canvas.offsetLeft, this.yPos-this.canvas.offsetTop);
-	this.context.arc(0, 0, 10, 0, Math.PI * 2, true);
-	this.context.moveTo(-5, 0);
-	this.context.lineTo(0, 5);
-	this.context.lineTo(10, 0);
-	this.context.lineTo(0, -10);
-	this.context.lineTo(-10, 0);
-	this.context.lineTo(5, 0);
-	this.context.strokeStyle = "#00FFFF";
-	this.context.stroke();
-	this.context.restore();
-	this.xPos = this.xPos + this.xPosChange;
-	this.yPos = this.yPos + this.yPosChange;
+	if(!this.hit){
+		// console.log("test- target");
+		// console.log(this.xPos+","+this.yPos);
+		this.context.save();
+		this.context.beginPath();
+		this.context.translate(this.xPos-this.canvas.offsetLeft, this.yPos-this.canvas.offsetTop);
+		this.context.lineWidth=4;
+		this.context.arc(0, 0, 20, 0, Math.PI * 2, true);
+		this.context.moveTo(-5, 0);
+		this.context.lineTo(0, 5);
+		this.context.lineTo(10, 0);
+		this.context.lineTo(0, -10);
+		this.context.lineTo(-10, 0);
+		this.context.lineTo(5, 0);
+		this.context.strokeStyle = "#00FFFF";
+		this.context.stroke();
+		this.context.restore();
+		this.xPos = this.xPos + this.xPosChange;
+		this.yPos = this.yPos + this.yPosChange;
+	}else{
+		// console.log("test- target");
+		// console.log(this.xPos+","+this.yPos);
+		this.context.save();
+		this.context.beginPath();
+		this.context.translate(this.xPos-this.canvas.offsetLeft, this.yPos-this.canvas.offsetTop);
+		//this.context.arc(0, 0, 10, 0, Math.PI * 2, true);
+		this.context.moveTo(-5, 0);
+		this.context.lineTo(0, 5);
+		this.context.lineTo(10, 0);
+		this.context.lineTo(0, -10);
+		this.context.lineTo(-10, 0);
+		this.context.lineTo(5, 0);
+		this.context.strokeStyle = "#00FFFF";
+		this.context.stroke();
+		this.context.restore();
+		this.xPos = this.xPos + this.xPosChange;
+		this.yPos = this.yPos + this.yPosChange;
+	}
 
 }
 
 Target.prototype.inHitBox = function(xpos, ypos) {
-	if (xpos > this.xPos-10 && xpos < this.xPos + 10 && ypos > this.yPos-10
-			&& ypos < this.yPos + 10) {
+	if (xpos > this.xPos-20 && xpos < this.xPos + 20 && ypos > this.yPos-20
+			&& ypos < this.yPos + 20) {
 		return true;
 	}
 	return false;

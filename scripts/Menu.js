@@ -21,6 +21,7 @@ function Menu(canvas) {
 	//this.interval=null;
 	this.xPos =this.canvas.width/3;
 	this.yPos = this.canvas.height/2;
+	this.fontSize=(this.canvas.width*0.03)+(this.canvas.height*0.02)
 	
 }
 // instance methods
@@ -43,6 +44,7 @@ Menu.prototype.showButton = function () {
 	this.context.fillStyle = "#ffffff";
 	this.context.fillText("START GAME",this.xPos ,this.yPos);
 	this.context.restore();
+	
 }
 
 
@@ -74,11 +76,11 @@ Menu.prototype.draw=function() {
 	// with putImageData()	
  	this.context.save();
  	this.context.beginPath();
-	this.context.font = "bold 32pt Courier New";
+	this.context.font = "bold "+this.fontSize+"pt Courier New";
 	this.context.fillStyle = "#ffffff";
 	this.context.fillText("START GAME",this.xPos ,this.yPos);
 	this.context.restore();
-
+	console.log(this.fontSize);
 
 	
 	//this.crosshair.getMagazine().draw();

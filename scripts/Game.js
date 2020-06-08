@@ -26,9 +26,7 @@ function Game(fps) {
 	
 }
 // instance methods
-// //////////////////// SHOOTING/SELECTING - MOUSE EVENTS
-// /////////////////////////////
-
+// ////////// SHOOTING/SELECTING - MOUSE EVENTS ////////
 // checks positions of crosshair and targets, marks targets true if hit
 Game.prototype.shot = function(event){
 	 event.stopPropagation(); event.preventDefault();
@@ -84,6 +82,7 @@ Game.prototype.stopGame = function(){
 	window.clearInterval(this.interval);
 	this.timer.stopSound();
 	this.gameState="MENU";
+	this.score.setHighScore();
 	
 }
 Game.prototype.stopMenu = function(){

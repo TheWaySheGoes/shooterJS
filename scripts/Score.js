@@ -7,6 +7,7 @@ function Score(canvas)  {
 	this.score=0;
 	this.xPos=this.canvas.width/6;
 	this.yPos=40;
+	this.highScore=0;
 }
 
 Score.prototype.draw = function (){
@@ -14,8 +15,16 @@ Score.prototype.draw = function (){
  	this.context.beginPath();
 	this.context.font = "bold 32pt Courier New";
 	this.context.fillStyle = "#ffffff";
-	this.context.fillText(this.getScore(),this.xPos ,this.yPos);
+	this.context.fillText("Score: "+this.getScore(),this.xPos ,this.yPos);
+	this.context.font = "bold 12pt Courier New";
+	this.context.fillText("HighScore: "+this.highScore,this.xPos ,this.yPos+20);
 	this.context.restore();
+}
+
+Score.prototype.setHighScore = function (){
+	if(	this.highScore<this.score){
+		this.highScore=this.score;
+	}
 }
 
 Score.prototype.minus = function (val) {

@@ -14,7 +14,7 @@ function Score(canvas)  {
 Score.prototype.draw = function (){
 	this.context.save();
  	this.context.beginPath();
-	this.context.font = "bold 16pt Courier New";
+	this.context.font = "bold 15pt Courier New";
 	this.context.fillStyle = "#ffffff";
 	this.context.fillText("Score: "+this.getScore(),this.xPos ,this.yPos);
 	this.context.font = "bold 12pt Courier New";

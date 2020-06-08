@@ -5,7 +5,7 @@ function Score(canvas)  {
 	this.canvas = canvas;
 	this.context = this.canvas.getContext("2d");
 	this.score=0;
-	this.xPos=this.canvas.width/7;
+	this.xPos=this.canvas.width/8;
 	this.yPos=40;
 	this.highScore=0;
 
@@ -45,7 +45,7 @@ Score.prototype.resetScore = function () {
 }
 
 Score.prototype.setPosGame = function (x,y){
-	this.xPos=this.canvas.width/7;
+	this.xPos=this.canvas.width/8;
 	this.yPos=40;
 }
 Score.prototype.setPosMenu = function (x,y){

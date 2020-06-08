@@ -78,7 +78,7 @@ Timer.prototype.setTimerColor = function() {
 
 Timer.prototype.drawTime = function() {
 	this.context.save();
-	this.context.font = "bold 32pt Courier New";
+	this.context.font = "bold 16pt Courier New";
 	this.context.fillStyle = this.timerColor;
 	this.context.fillText("Time: "+this.getTime(), this.canvas.width / 6 * 4, 40);
 	this.context.restore();

@@ -8,12 +8,13 @@ function Score(canvas)  {
 	this.xPos=this.canvas.width/6;
 	this.yPos=40;
 	this.highScore=0;
+
 }
 
 Score.prototype.draw = function (){
- 	this.context.save();
+	this.context.save();
  	this.context.beginPath();
-	this.context.font = "bold 32pt Courier New";
+	this.context.font = "bold 16pt Courier New";
 	this.context.fillStyle = "#ffffff";
 	this.context.fillText("Score: "+this.getScore(),this.xPos ,this.yPos);
 	this.context.font = "bold 12pt Courier New";

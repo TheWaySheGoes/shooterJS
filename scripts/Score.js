@@ -48,6 +48,6 @@ Score.prototype.setPosGame = function (x,y){
 	this.yPos=40;
 }
 Score.prototype.setPosMenu = function (x,y){
-	this.xPos=this.canvas.width/2;
+	this.xPos=this.canvas.width/3;
 	this.yPos=(this.canvas.height/2)+50;
 }

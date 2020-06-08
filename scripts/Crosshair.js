@@ -58,8 +58,9 @@ Crosshair.prototype.inReloadBox=function() {
 ////////////////MOUSE POS AND MOVEMENT///////////////////////
 Crosshair.prototype.setPos = function(element) {
 	// element.preventDefault();
-	this.xPos = element.pageX;
-	this.yPos = element.pageY;
+	var rect = canvas.getBoundingClientRect();
+	this.xPos = (element.pageX-rect.left)*canvas.width/rect.width;//element.pageX;
+	this.yPos = (element.pageY-rect.top)*canvas.height/rect.height;//element.pageY;
 
 }
 
@@ -67,7 +68,7 @@ Crosshair.prototype.draw = function() {
 
 	// console.log("test- crosshair")
 	console.log(this.xPos + "," + this.yPos);
-
+	
 	
 	// hide cursor when on canvas
 	if (this.xPos > 0 && this.xPos < this.canvas.width && this.yPos > 0
@@ -78,7 +79,7 @@ Crosshair.prototype.draw = function() {
 
 	this.context.save();
 	this.context.beginPath();
-	this.context.translate(this.xPos-this.canvas.offsetLeft, this.yPos-this.canvas.offsetTop);
+	this.context.translate(this.xPos, this.yPos);
 	this.context.lineWidth=2;
 	this.context.arc(0, 0, 10, 0, Math.PI * 2, true);
 	this.context.moveTo(-3, 0);
@@ -91,6 +92,7 @@ Crosshair.prototype.draw = function() {
 	this.context.lineTo(0, +10);
 	this.context.strokeStyle = this.crosshairColor;
 	this.context.stroke();
+	this.context.translate(0, 0);
 	this.context.restore();
 
 }

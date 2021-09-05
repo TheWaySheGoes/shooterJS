@@ -5,7 +5,7 @@
 
 
 function game(){
-	var game = new Game(30);
+	var game = new Game(60);
 	//game.setup();	
 	//game.startGame();//argument = fps
 	game.startMenu();

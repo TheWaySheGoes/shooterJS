@@ -7,7 +7,7 @@ function Score(canvas)  {
 	this.score=0;
 	this.xPos=this.canvas.width/8;
 	this.yPos=40;
-	this.highScore=0;
+	this.highScore=localStorage.getItem("highScore");
 
 }
 
@@ -25,6 +25,7 @@ Score.prototype.draw = function (){
 Score.prototype.setHighScore = function (){
 	if(	this.highScore<this.score){
 		this.highScore=this.score;
+		localStorage.setItem("highScore",""+this.score);
 	}
 }
 

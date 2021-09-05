@@ -7,7 +7,7 @@ function Score(canvas)  {
 	this.score=0;
 	this.xPos=this.canvas.width/8;
 	this.yPos=40;
-	this.highScore=localStorage.getItem("highScore");
+	this.highScore=Number(localStorage.getItem("highScore"));
 
 }
 
